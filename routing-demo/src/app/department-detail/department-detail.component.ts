@@ -4,9 +4,10 @@ import { ActivatedRoute, Router , ParamMap} from '@angular/router';
   selector: 'app-department-detail',
   template: `
   <p>Department detail works {{departmentId}}</p>
-  <button style="margin:10px;backgorund-color:grey;" (click)="goPrevious()">Previous</button>
-  <button  style="margin:10px;backgorund-color:grey;" (click)="goNext()">Next</button>
+  <button style="margin:10px;backgorund-color:gray;" (click)="goPrevious()">Previous</button>
+  <button  style="margin:10px;backgorund-color:gray;"  (click)="goNext()">Next</button>
   
+  <button  style="margin:10px;backgorund-color:gray;" (click)="goToDepartments()" >Back</button>
   `,
   styles: [
   ]
@@ -17,12 +18,12 @@ export class DepartmentDetailComponent implements OnInit {
   
   ngOnInit(): void {
     
-    let idd = this.route.snapshot.paramMap.get('id');
-    this.departmentId=idd;
-    // this.route.paramMap.subscribe((params:ParamMap)=>{
-    //   let id=parseInt(params.get('id'));
-    //   this.departmentId=id;
-    // });
+    // let idd = this.route.snapshot.paramMap.get('id');
+    // this.departmentId=idd;
+   this.route.paramMap.subscribe((params:ParamMap)=>{
+     let id=params.get('id');
+     this.departmentId=id;
+   });
   }
   goPrevious(){
     debugger;
@@ -36,6 +37,10 @@ export class DepartmentDetailComponent implements OnInit {
     let nextId=parseInt(this.departmentId)+1;
     debugger;
     this.router.navigate(['/departments' ,nextId])
+  }
+  goToDepartments(){
+    let selectedId=this.departmentId ?this.departmentId:null;
+    this.router.navigate(['/departments',{id:selectedId}]);
   }
 
 }
