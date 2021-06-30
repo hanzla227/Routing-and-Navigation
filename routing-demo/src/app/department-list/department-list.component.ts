@@ -36,7 +36,7 @@ export class DepartmentListComponent implements OnInit {
    constructor(private router:Router , private route:ActivatedRoute) { }
 
   onslect(department:any){
-    debugger
+    
     this.router.navigate(['/departments',department.id])
   }
   isSelected(department:any){
